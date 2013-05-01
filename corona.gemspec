@@ -11,4 +11,8 @@ Gem::Specification.new do |s|
   s.files             = `git ls-files`.split("\n")
   s.executables       = %w( corona )
   s.require_path      = 'lib'
+
+  s.add_dependency 'sequel'
+  s.add_dependency 'sqlite3'
+  s.add_dependency 'snmp'
 end

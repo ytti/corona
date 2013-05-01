@@ -5,12 +5,11 @@
   * Tries to handle gracefully renumbering, renaming, etc
 
 # Install
-  1. rake build
-  2. gem install ./gems/corona\*.gem
-  3. corona
-  4. ^C (break it)
-  5. edit ~/.config/corona/config 
-  6. put corona in crontab as _corona|mail -E -s 'new nodes found' foo@example.com_
+  1. gem install corona
+  2. corona
+  3. ^C (break it)
+  4. edit ~/.config/corona/config 
+  5. put corona in crontab as _corona|mail -E -s 'new nodes found' foo@example.com_
 
 # Config
   * You need to configure SNMP community

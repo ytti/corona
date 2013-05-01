@@ -149,10 +149,14 @@ module Corona
         'ios'
       when /JUNOS/
         'junos'
-      when /^Summit/
-        'xos'
       when /^NetScreen/, /^SSG-\d+/
         'screenos'
+      when /IronWare/
+        'ironware'
+      when /^Summit/
+        'xos'
+      when /^\d+[A-Z]\sEthernet Switch$/
+        'powerconnect'
       end
     end
 
