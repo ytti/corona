@@ -27,7 +27,7 @@ module Corona
       oid = [oid].flatten.join('.')
       begin
         @snmp.get(oid).each_varbind { |vb| return vb }
-      rescue ::SNMP::RequestTimeout
+      rescue ::SNMP::RequestTimeout, Errno::EACCES
         return false
       end
     end
@@ -42,7 +42,7 @@ module Corona
             end
           end
         end
-      rescue ::SNMP::RequestTimeout
+      rescue ::SNMP::RequestTimeout, Errno::EACCES
         return false
       end
       result
