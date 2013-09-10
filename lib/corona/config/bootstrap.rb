@@ -7,6 +7,8 @@ module Corona
   CFG.ignore    = %w( 10.10.10.42/32 10.10.20.42/32 )
   CFG.mgmt      = %w( lo0.0 loopback0 vlan2 )
   CFG.threads   = 50
+  CFG.timeout   = 0.25
+  CFG.retries   = 2
   CFG.log       = File.join Config::Root, 'log'
   CFG.debug     = false
   CFG.save

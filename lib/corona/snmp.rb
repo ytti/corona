@@ -18,7 +18,10 @@ module Corona
     require 'snmp'
     def initialize host, community=CFG.community
       @snmp = ::SNMP::Manager.new :Host => host, :Community => community,
-                                  :Timeout => 1, :Retries => 3, :MibModules => false
+                                  :Timeout => CFG.timeout, :Retries => CFG.retries, :MibModules => []
+    end
+    def close
+      @snmp.close
     end
     def get *oid
       oid = [oid].flatten.join('.')

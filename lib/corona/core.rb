@@ -49,6 +49,7 @@ module Corona
           Log.warn "no ifIndex for #{ip}"
         end
       end
+      snmp.close
     end
 
     def process opt
