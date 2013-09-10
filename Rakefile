@@ -4,6 +4,7 @@ begin
   Bundler.setup
 rescue LoadError
   warn 'missing dependencies'
+  raise
   exit 42
 end
 
