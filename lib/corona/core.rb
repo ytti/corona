@@ -56,7 +56,7 @@ module Corona
       opt = normalize_opt opt
       record = mkrecord opt
       old_by_ip, old_by_sysname = @db.old record[:id], record[:oid_sysName]
-     
+
       # unique box having non-unique sysname
       # old_by_sysname = false if record[:oid_sysDescr].match 'Application Control Engine'
 
@@ -104,14 +104,14 @@ module Corona
       elsif new_int_pref == 100 and old_int_pref == 99
         # neither old or new interface is known good MGMT interface
         if SNMP.new(old_by_sysname[:ip]).sysdescr
-          # if old IP works, don't update 
+          # if old IP works, don't update
           Log.debug "#{record[:ip]} not updating, previously seen as #{old_by_sysname[:ip]}"
         else
           Log.info "#{record[:ip]} updating, old #{old_by_sysname[:ip]} is dead"
           @db.update record, [:oid_sysName, old_by_sysname[:oid_sysName]]
         end
 
-      elsif new_int_pref >= old_int_pref 
+      elsif new_int_pref >= old_int_pref
         # nothing to do, we have better entry
         Log.debug "#{record[:ip]} already seen as superior via #{old_by_sysname[:ip]}"
 
@@ -158,6 +158,8 @@ module Corona
         'xos'
       when /^\d+[A-Z]\sEthernet Switch$/
         'powerconnect'
+      when /^Alcatel-Lucent/
+        'aos'
       end
     end
 

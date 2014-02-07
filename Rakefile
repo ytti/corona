@@ -26,7 +26,7 @@ end
 
 desc "Install gem locally"
 task :install => :build do
-  system "sudo sh -c \'umask 022; gem install gems/#{gemspec.name}-#{gemspec.version}\'"
+  system "sudo sh -c \'umask 022; gem install gems/#{gemspec.name}-#{gemspec.version}.gem\'"
 end
 
 desc "Clean automatically generated files"
