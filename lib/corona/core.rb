@@ -146,6 +146,8 @@ module Corona
       case opt[:oids][:sysDescr]
       when /Cisco Catalyst operating System/
         'catos'
+      when /Cisco Controller/
+        'aireos'
       when /cisco/i, /Application Control Engine/i
         'ios'
       when /JUNOS/
