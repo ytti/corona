@@ -1,7 +1,8 @@
 require 'corona/log'
 require 'corona/config/core'
 require 'corona/snmp'
-require 'corona/db'
+require 'corona/db/db'
+require 'corona/model'
 require 'ipaddr'
 require 'resolv'
 
@@ -55,7 +56,7 @@ module Corona
     def process opt
       opt = normalize_opt opt
       record = mkrecord opt
-      old_by_ip, old_by_sysname = @db.old record[:id], record[:oid_sysName]
+      old_by_ip, old_by_sysname = @db.old record[:ip], record[:oid_sysName]
 
       # unique box having non-unique sysname
       # old_by_sysname = false if record[:oid_sysDescr].match 'Application Control Engine'
@@ -122,7 +123,6 @@ module Corona
 
     def mkrecord opt
       {
-        :id              => opt[:ip].to_i,
         :ip              => opt[:ip].to_s,
         :ptr             => ip2name(opt[:ip].to_s),
         :model           => Model.map(opt[:oids][:sysDescr]),
