@@ -125,7 +125,7 @@ module Corona
         :id              => opt[:ip].to_i,
         :ip              => opt[:ip].to_s,
         :ptr             => ip2name(opt[:ip].to_s),
-        :model           => model(opt),
+        :model           => Model.map(opt[:oids][:sysDescr]),
         :oid_ifDescr     => opt[:int],
         :oid_sysName     => opt[:oids][:sysName],
         :oid_sysLocation => opt[:oids][:sysLocation],
@@ -140,29 +140,6 @@ module Corona
 
     def ip2name ip
       Resolv.getname ip rescue ip
-    end
-
-    def model opt
-      case opt[:oids][:sysDescr]
-      when /Cisco Catalyst operating System/
-        'catos'
-      when /Cisco Controller/
-        'aireos'
-      when /cisco/i, /Application Control Engine/i
-        'ios'
-      when /JUNOS/
-        'junos'
-      when /^NetScreen/, /^SSG-\d+/
-        'screenos'
-      when /IronWare/
-        'ironware'
-      when /^Summit/
-        'xos'
-      when /^\d+[A-Z]\sEthernet Switch$/
-        'powerconnect'
-      when /^Alcatel-Lucent/
-        'aos'
-      end
     end
 
     def resolve_networks
