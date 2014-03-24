@@ -22,6 +22,8 @@ module Corona
         'ironware'
       when /^Summit/
         'xos'
+      when /^AOS-W/
+        'aosw'
       when /^Alcatel-Lucent/
         'aos'
       when /ProCurve/  # ProCurve OS does not seem to have name?
