@@ -22,10 +22,16 @@ module Corona
         'ironware'
       when /^Summit/
         'xos'
+      when /TiMOS/
+        'timos'
+      when /^Alcatel-Lucent \S+ [789]\./  #aos <7 is vxworks, >=7 is linux
+        'aos7'
       when /^AOS-W/
         'aosw'
       when /^Alcatel-Lucent/
         'aos'
+      when /^AX Series/
+        'acos'
       when /ProCurve/  # ProCurve OS does not seem to have name?
         'procurve'
       when /^\d+[A-Z]\sEthernet Switch$/
