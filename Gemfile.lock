@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    corona (0.0.5)
+    corona (0.0.6)
       sequel
       snmp
       sqlite3

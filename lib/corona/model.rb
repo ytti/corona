@@ -36,6 +36,8 @@ module Corona
         'procurve'
       when /^\d+[A-Z]\sEthernet Switch$/
         'powerconnect'
+      else
+        'fortios'  # populated with system hostname, i hope we don't get another like it
       end
     end
   end
