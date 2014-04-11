@@ -18,14 +18,14 @@ module Corona
     private
 
     def initialize
-      poll, ignore = resolve_networks
-      @mutex       = Mutex.new
-      @db          = DB.new
-      threads      = []
+      poll, ignores = resolve_networks
+      @mutex        = Mutex.new
+      @db           = DB.new
+      threads       = []
       Thread.abort_on_exception = true
       poll.each do |net|
         net.to_range.each do |ip|
-          next if ignore.any? { |ignore| ignore.include? ip }
+          next if ignores.any? { |ignore| ignore.include? ip }
           while threads.size >= CFG.threads
             threads.delete_if { |thread| not thread.alive? }
             sleep 0.01
@@ -125,16 +125,17 @@ module Corona
       {
         :ip              => opt[:ip].to_s,
         :ptr             => ip2name(opt[:ip].to_s),
-        :model           => Model.map(opt[:oids][:sysDescr]),
+        :model           => Model.map(opt[:oids][:sysDescr], opt[:oids][:sysObjectID]),
         :oid_ifDescr     => opt[:int],
         :oid_sysName     => opt[:oids][:sysName],
         :oid_sysLocation => opt[:oids][:sysLocation],
         :oid_sysDescr    => opt[:oids][:sysDescr],
+        :oid_sysObjectID => opt[:oids][:sysObjectID].join('.'),
       }
     end
 
     def normalize_opt opt
-      opt[:oids][:sysName].sub! /-re[1-9]\./, '-re0.'
+      opt[:oids][:sysName].sub!(/-re[1-9]\./, '-re0.')
       opt
     end
 
@@ -149,7 +150,7 @@ module Corona
         else
           out = []
           File.read(nets).each_line do |net|
-            net = net.match /^([\d.\/]+)/
+            net = net.match(/^([\d.\/]+)/)
             out.push IPAddr.new net[1] if net
           end
           out
