@@ -3,14 +3,15 @@ PATH
   specs:
     corona (0.0.7)
       sequel
+      slop
       snmp
       sqlite3
 
 GEM
   remote: https://rubygems.org/
   specs:
-    rspec-core (2.14.7)
     sequel (4.7.0)
+    slop (3.4.7)
     snmp (1.1.1)
     sqlite3 (1.3.8)
 
@@ -19,4 +20,3 @@ PLATFORMS
 
 DEPENDENCIES
   corona!
-  rspec-core

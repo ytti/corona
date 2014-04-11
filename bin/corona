@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'corona'
-
-Corona.new
+begin
+  require 'corona/cli'
+  Corona::CLI.new.run
+rescue => error
+  warn "#{error}"
+  raise if Corona::CFG.debug
+end

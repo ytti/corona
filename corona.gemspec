@@ -15,5 +15,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'sequel'
   s.add_dependency 'sqlite3'
   s.add_dependency 'snmp'
-  s.add_development_dependency 'rspec-core'
+  s.add_dependency 'slop'
 end
