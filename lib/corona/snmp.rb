@@ -2,14 +2,15 @@ module Corona
   class SNMP
     DB_OID = {
       :sysDescr     => '1.3.6.1.2.1.1.1.0',
-      :sysLocation  => '1.3.6.1.2.1.1.6.0',
+      :sysObjectID  => '1.3.6.1.2.1.1.2.0',
       :sysName      => '1.3.6.1.2.1.1.5.0',
+      :sysLocation  => '1.3.6.1.2.1.1.6.0',
     }
     OID = {
+       :ifDescr            => '1.3.6.1.2.1.2.2.1.2',
        :ipCidrRouteIfIndex => '1.3.6.1.2.1.4.24.4.1.5',  # addr.255.255.255.255.0.0.0.0.0
        :ipAdEntIfIndex     => '1.3.6.1.2.1.4.20.1.2',    # addr
        :ipAddressIfIndex   => '1.3.6.1.2.1.4.34.1.3',    # 1,2 (uni,any) . 4,16 (size) . addr
-       :ifDescr            => '1.3.6.1.2.1.2.2.1.2',
     }
     UNICAST = 1
     IPV4    = 4
@@ -54,7 +55,7 @@ module Corona
         r = @snmp.get_bulk 0, BULK_MAX, oid
         r.varbind_list.each do |vb|
           oid = vb.name.to_str
-          (last = true; break) if not oid.match /^#{Regexp.quote root}/
+          (last = true; break) if not oid.match(/^#{Regexp.quote root}/)
           vbs.push vb
         end
       end

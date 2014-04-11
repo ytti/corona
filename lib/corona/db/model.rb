@@ -13,6 +13,7 @@ module Corona
         String      :oid_sysName
         String      :oid_sysLocation
         String      :oid_sysDescr
+        String      :oid_sysObjectID
       end
       create_table unless table_exists?
     end

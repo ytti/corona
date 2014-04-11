@@ -1,6 +1,6 @@
 module Corona
   class Model
-    def self.map sysDescr
+    def self.map sysDescr, sysObjectID
       case sysDescr
       when /Cisco Catalyst Operating System/i
         'catos'
@@ -37,7 +37,12 @@ module Corona
       when /^\d+[A-Z]\sEthernet Switch$/
         'powerconnect'
       else
-        'fortios'  # populated with system hostname, i hope we don't get another like it
+        case sysObjectID
+        when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.12356.'))
+          'fortios'  # 1.3.6.1.4.1.12356.101.1.10004
+        else
+          'unsupported'
+        end
       end
     end
   end
