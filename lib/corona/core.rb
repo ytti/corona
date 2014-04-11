@@ -8,8 +8,8 @@ require 'resolv'
 
 module Corona
   class << self
-    def new
-      Core.new
+    def new opts={}
+      Core.new opts
     end
   end
 
@@ -17,8 +17,9 @@ module Corona
 
     private
 
-    def initialize
-      poll, ignores = resolve_networks
+    def initialize opts={}
+      cidr          = opts.delete :cidr
+      poll, ignores = resolve_networks cidr
       @mutex        = Mutex.new
       @db           = DB.new
       threads       = []
@@ -143,8 +144,9 @@ module Corona
       Resolv.getname ip rescue ip
     end
 
-    def resolve_networks
-      [CFG.poll, CFG.ignore].map do |nets|
+    def resolve_networks cidr
+      cidr = cidr ? [cidr].flatten : CFG.poll
+      [cidr, CFG.ignore].map do |nets|
         if nets.respond_to? :each
           nets.map { |net| IPAddr.new net }
         else
