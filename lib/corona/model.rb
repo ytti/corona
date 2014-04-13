@@ -39,7 +39,9 @@ module Corona
       else
         case sysObjectID
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.12356.'))
-          'fortios'  # 1.3.6.1.4.1.12356.101.1.10004
+          'fortios' # 1.3.6.1.4.1.12356.101.1.10004
+        when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.6486.'))
+          'aos'     # 1.3.6.1.4.1.6486.800.1.1.2.1.11.2.2
         else
           'unsupported'
         end
