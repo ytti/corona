@@ -19,6 +19,11 @@ module Corona
 
     def initialize opts={}
       cidr          = opts.delete :cidr
+      @output       = opts.delete :output
+      if not @output
+        @output = Logger.new $stdout
+        @output.formatter = proc { |_ ,_ ,_ , msg| msg + "\n" }
+      end
       poll, ignores = resolve_networks cidr
       @mutex        = Mutex.new
       @db           = DB.new
@@ -64,7 +69,7 @@ module Corona
 
       if not old_by_sysname and not old_by_ip
         # all new device
-        puts "ptr [%s] sysName [%s] ip [%s]" % [record[:ptr], record[:oid_sysName], record[:ip]]
+        @output.info "ptr [%s] sysName [%s] ip [%s]" % [record[:ptr], record[:oid_sysName], record[:ip]]
         Log.info "#{record[:ip]} added"
         @db.add record
 

@@ -8,7 +8,9 @@ module Corona
       if @opts[:poll]
         Corona.new :cidr=>@opts[:poll]
       elsif @opts[:remove]
-        remove_from_db @opts[:remove]
+        remove_records @opts[:remove]
+      elsif @opts['purge-old']
+        remove_old @opts['purge-old']
       else
         Corona.new
       end
@@ -29,15 +31,25 @@ module Corona
         on 'p=', 'poll',       'Poll CIDR [argument]'
         on 'r=', 'remove',     'Remove [argument] from DB'
         on 'm=', 'max-delete', "Maximum number to delete, default #{MAX_DELETE}"
+        on 'o=', 'purge-old',  'Remove records order than [argument] days'
         on 's',  'simulate',   'Simulate, do not change DB'
       end
       [opts.parse!, opts]
     end
 
-    def remove_from_db name
-      max_del = @opts['max-delete'] ? @opts['max-delete'] : MAX_DELETE
+    def remove_records name
       DB.new
-      devs = DB::Device.filter(Sequel.like(:ptr, "%#{name}%")).all
+      delete_records DB::Device.filter(Sequel.like(:ptr, "%#{name}%")).all
+    end
+
+    def remove_old days
+      old = (Time.now.utc - days.to_i * 24 * 60 * 60)
+      DB.new
+      delete_records DB::Device.filter{last_seen < old}.all
+    end
+
+    def delete_records devs
+      max_del = @opts['max-delete'] ? @opts['max-delete'] : MAX_DELETE
       if devs.size > max_del.to_i
         puts 'Too many matching devices:'
         devs.each do |dev|
@@ -52,6 +64,5 @@ module Corona
         end
       end
     end
-
   end
 end
