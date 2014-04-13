@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    corona (0.0.7)
+    corona (0.0.8)
       sequel
       slop
       snmp
