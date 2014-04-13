@@ -28,7 +28,7 @@ module Corona
         on 'd',  'debug',      'Debugging on'
         on 'p=', 'poll',       'Poll CIDR [argument]'
         on 'r=', 'remove',     'Remove [argument] from DB'
-        on 'm=', 'max-delete', "Maximum number to detel, default #{MAX_DELETE}"
+        on 'm=', 'max-delete', "Maximum number to delete, default #{MAX_DELETE}"
         on 's',  'simulate',   'Simulate, do not change DB'
       end
       [opts.parse!, opts]
