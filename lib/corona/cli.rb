@@ -23,11 +23,7 @@ module Corona
       args, @opts = opts_parse
       @arg = args.shift
       CFG.debug = true if @opts[:debug]
-      if CFGS.system.empty? and CFGS.user.empty?
-        CFGS.user = CFGS.default
-        CFGS.save :user
-        raise NoConfig, 'edit ~/.config/corona/config'
-      end
+      raise NoConfig, 'edit ~/.config/corona/config' if CFGS.create
     end
 
     def opts_parse
