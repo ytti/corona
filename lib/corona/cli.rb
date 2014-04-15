@@ -3,6 +3,7 @@ module Corona
     MAX_DELETE = 1
     require 'corona'
     require 'slop'
+    class NoConfig < CoronaError; end
 
     def run
       if @opts[:poll]
@@ -22,6 +23,11 @@ module Corona
       args, @opts = opts_parse
       @arg = args.shift
       CFG.debug = true if @opts[:debug]
+      if CFGS.system.empty? and CFGS.user.empty?
+        CFGS.user = CFGS.default
+        CFGS.save :user
+        raise NoConfig, 'edit ~/.config/corona/config'
+      end
     end
 
     def opts_parse

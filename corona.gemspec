@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = 'corona'
-  s.version           = '0.0.10'
+  s.version           = '0.0.11'
   s.platform          = Gem::Platform::RUBY
   s.authors           = [ 'Saku Ytti' ]
   s.email             = %w( saku@ytti.fi )
@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'sqlite3'
   s.add_dependency 'snmp'
   s.add_dependency 'slop'
+  s.add_dependency 'asetus'
 end

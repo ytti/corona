@@ -1,5 +1,5 @@
 require 'corona/log'
-require 'corona/config/core'
+require 'corona/config'
 require 'corona/snmp'
 require 'corona/db/db'
 require 'corona/model'
