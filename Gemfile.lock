@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    corona (0.0.11)
+    corona (0.0.12)
       asetus
       sequel
       slop
@@ -11,12 +11,12 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    asetus (0.0.6)
+    asetus (0.0.7)
       slop
-    sequel (4.7.0)
-    slop (3.4.7)
+    sequel (4.9.0)
+    slop (3.5.0)
     snmp (1.1.1)
-    sqlite3 (1.3.8)
+    sqlite3 (1.3.9)
 
 PLATFORMS
   ruby

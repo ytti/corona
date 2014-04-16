@@ -11,15 +11,21 @@ module Corona
     def new opts={}
       Core.new opts
     end
+
+    def poll opts={}
+      host = opts.delete :host
+      raise CoronaError, '\'host\' not given' unless host
+      corona = new opts
+      result = corona.poll Resolv.getaddress(host)
+      corona.mkrecord result if result
+    end
   end
 
   class Core
 
-    private
-
-    def initialize opts={}
-      cidr          = opts.delete :cidr
-      @output       = opts.delete :output
+    def run
+      cidr          = @opts.delete :cidr
+      @output       = @opts.delete :output
       if not @output
         @output = Logger.new $stdout
         @output.formatter = proc { |_ ,_ ,_ , msg| msg + "\n" }
@@ -36,19 +42,23 @@ module Corona
             threads.delete_if { |thread| not thread.alive? }
             sleep 0.01
           end
-          threads << Thread.new { poll ip }
+          threads << Thread.new do
+            result = poll ip
+            @mutex.synchronize { process result } if result
+          end
         end
       end
       threads.each { |thread| thread.join }
     end
 
     def poll ip
-      snmp = SNMP.new ip.to_s
+      result = nil
+      snmp = SNMP.new ip.to_s, @community
       oids = snmp.dbget
       if oids
         if index = snmp.ip2index(ip.to_s)
           if int = snmp.ifdescr(index)
-            @mutex.synchronize { process :oids=>oids, :int=>int.downcase, :ip=>ip }
+            result = {:oids=>oids, :int=>int.downcase, :ip=>ip}
           else
             Log.warn "no ifDescr for #{index} at #{ip}"
           end
@@ -57,6 +67,28 @@ module Corona
         end
       end
       snmp.close
+      result
+    end
+
+    def mkrecord opt
+      {
+        :ip              => opt[:ip].to_s,
+        :ptr             => ip2name(opt[:ip].to_s),
+        :model           => Model.map(opt[:oids][:sysDescr], opt[:oids][:sysObjectID]),
+        :oid_ifDescr     => opt[:int],
+        :oid_sysName     => opt[:oids][:sysName],
+        :oid_sysLocation => opt[:oids][:sysLocation],
+        :oid_sysDescr    => opt[:oids][:sysDescr],
+        :oid_sysObjectID => opt[:oids][:sysObjectID].join('.'),
+      }
+    end
+
+    private
+
+    def initialize opts={}
+      @opts = opts
+      @community   = opts.delete :community
+      @community ||= CFG.community
     end
 
     def process opt
@@ -110,7 +142,7 @@ module Corona
 
       elsif new_int_pref == 100 and old_int_pref == 99
         # neither old or new interface is known good MGMT interface
-        if SNMP.new(old_by_sysname[:ip]).sysdescr
+        if SNMP.new(old_by_sysname[:ip], @community).sysdescr
           # if old IP works, don't update
           Log.debug "#{record[:ip]} not updating, previously seen as #{old_by_sysname[:ip]}"
         else
@@ -125,19 +157,6 @@ module Corona
       else
         Log.error "not updating, new: #{record[:ip]}, old: #{old_by_sysname[:ip]}"
       end
-    end
-
-    def mkrecord opt
-      {
-        :ip              => opt[:ip].to_s,
-        :ptr             => ip2name(opt[:ip].to_s),
-        :model           => Model.map(opt[:oids][:sysDescr], opt[:oids][:sysObjectID]),
-        :oid_ifDescr     => opt[:int],
-        :oid_sysName     => opt[:oids][:sysName],
-        :oid_sysLocation => opt[:oids][:sysLocation],
-        :oid_sysDescr    => opt[:oids][:sysDescr],
-        :oid_sysObjectID => opt[:oids][:sysObjectID].join('.'),
-      }
     end
 
     def normalize_opt opt

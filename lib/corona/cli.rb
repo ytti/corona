@@ -7,13 +7,13 @@ module Corona
 
     def run
       if @opts[:poll]
-        Corona.new :cidr=>@opts[:poll]
+        Corona.new(:cidr=>@opts[:poll]).run
       elsif @opts[:remove]
         remove_records @opts[:remove]
       elsif @opts['purge-old']
         remove_old @opts['purge-old']
       else
-        Corona.new
+        Corona.new.run
       end
     end
 
