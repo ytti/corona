@@ -20,6 +20,8 @@ module Corona
         'timos'
       when /Cisco Adaptive Security Appliance/
         'asa'
+      when /Brocade Fibre Channel Switch/
+        'fabricos'
       when /cisco/i, /Application Control Engine/i
         'ios'
       when /Force10 OS/
@@ -48,8 +50,10 @@ module Corona
           'aos'     # 1.3.6.1.4.1.6486.800.1.1.2.1.11.2.2
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.6027.'))
           'ftos'    # 1.3.6.1.4.1.6027.1.3.4
-        when Regexp.new('^' + Regexp.quote('.1.3.6.1.4.1.9.1.745'))
+        when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.9.1.745'))
           'asa'     # 1.3.6.1.4.1.9.1.745
+        when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.1588.'))
+          'fabricos'# .1.3.6.1.4.1.1588.2.1.1.1
         else
           'unsupported'
         end
