@@ -10,20 +10,24 @@ module Corona
         'iosxr'
       when /NX-OS/
         'nxos'
-      when /cisco/i, /Application Control Engine/i
-        'ios'
       when /JUNOS/
         'junos'
-      when /^NetScreen/, /^SSG-\d+/
-        'screenos'
       when /Arista Networks EOS/
         'eos'
       when /IronWare/
         'ironware'
-      when /^Summit/
-        'xos'
       when /TiMOS/
         'timos'
+      when /Cisco Adaptive Security Appliance/
+        'asa'
+      when /cisco/i, /Application Control Engine/i
+        'ios'
+      when /Force10 OS/
+        'ftos'
+      when /^NetScreen/, /^SSG-\d+/
+        'screenos'
+      when /^Summit/
+        'xos'
       when /^Alcatel-Lucent \S+ [789]\./  #aos <7 is vxworks, >=7 is linux
         'aos7'
       when /^AOS-W/
@@ -42,6 +46,10 @@ module Corona
           'fortios' # 1.3.6.1.4.1.12356.101.1.10004
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.6486.'))
           'aos'     # 1.3.6.1.4.1.6486.800.1.1.2.1.11.2.2
+        when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.6027.'))
+          'ftos'    # 1.3.6.1.4.1.6027.1.3.4
+        when Regexp.new('^' + Regexp.quote('.1.3.6.1.4.1.9.1.745'))
+          'asa'     # 1.3.6.1.4.1.9.1.745
         else
           'unsupported'
         end
