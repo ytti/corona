@@ -59,7 +59,7 @@ module Corona
         result = {:oids=>oids, :ip=>ip, :int=>'n/a'}
         if index = snmp.ip2index(ip.to_s)
           if int = snmp.ifdescr(index)
-            result[:int] => int.downcase
+            result[:int] = int.downcase
           else
             Log.debug "no ifDescr for #{index} at #{ip}"
           end
