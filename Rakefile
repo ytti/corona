@@ -1,7 +1,7 @@
 begin
   require 'rake/testtask'
   require 'bundler'
-  Bundler.setup
+  #Bundler.setup
 rescue LoadError
   warn 'bunler missing'
   exit 42

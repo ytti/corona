@@ -1,6 +1,7 @@
 Gem::Specification.new do |s|
   s.name              = 'corona'
-  s.version           = '0.0.13'
+  s.version           = '0.1.0'
+  s.licenses          = ['Apache-2.0']
   s.platform          = Gem::Platform::RUBY
   s.authors           = [ 'Saku Ytti' ]
   s.email             = %w( saku@ytti.fi )
@@ -12,9 +13,9 @@ Gem::Specification.new do |s|
   s.executables       = %w( corona )
   s.require_path      = 'lib'
 
-  s.add_dependency 'sequel'
-  s.add_dependency 'sqlite3'
-  s.add_dependency 'snmp'
-  s.add_dependency 'slop'
-  s.add_dependency 'asetus'
+  s.add_dependency 'sequel',  '~> 4.12'
+  s.add_dependency 'sqlite3', '~> 1.3'
+  s.add_dependency 'snmp',    '~> 1.2'
+  s.add_dependency 'slop',    '~> 3.5'
+  s.add_dependency 'asetus',  '~> 0.1'
 end
