@@ -56,14 +56,15 @@ module Corona
       snmp = SNMP.new ip.to_s, @community
       oids = snmp.dbget
       if oids
+        result = {:oids=>oids, :ip=>ip, :int=>'n/a'}
         if index = snmp.ip2index(ip.to_s)
           if int = snmp.ifdescr(index)
-            result = {:oids=>oids, :int=>int.downcase, :ip=>ip}
+            result[:int] => int.downcase
           else
-            Log.warn "no ifDescr for #{index} at #{ip}"
+            Log.debug "no ifDescr for #{index} at #{ip}"
           end
         else
-          Log.warn "no ifIndex for #{ip}"
+          Log.debug "no ifIndex for #{ip}"
         end
       end
       snmp.close

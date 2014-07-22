@@ -36,7 +36,7 @@ module Corona
         'aosw'
       when /^Alcatel-Lucent/
         'aos'
-      when /^AX Series/
+      when /\s+ACOS\s+/
         'acos'
       when /ProCurve/  # ProCurve OS does not seem to have name?
         'procurve'
@@ -56,6 +56,8 @@ module Corona
           'screenos'     # 1.3.6.1.4.1.3224.1.51 (SSG) 1.16 (Netscreen 2k)
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.674.'))
           'powerconnect' # 1.3.6.1.4.1.674.10895.3031
+        when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.22610.'))
+          'acos'         # 1.3.6.1.4.1.22610.1.3.14
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.9.1.745'))
           'asa'          # 1.3.6.1.4.1.9.1.745
         else
