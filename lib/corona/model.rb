@@ -40,6 +40,8 @@ module Corona
         'acos'
       when /ProCurve/  # ProCurve OS does not seem to have name?
         'procurve'
+      when /ASAM/
+        'isam'
       when /^\d+[A-Z]\sEthernet Switch$/
         'powerconnect'
       else
@@ -58,6 +60,8 @@ module Corona
           'powerconnect' # 1.3.6.1.4.1.674.10895.3031
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.22610.'))
           'acos'         # 1.3.6.1.4.1.22610.1.3.14
+        when Regexp.new('^' + Regexp.quote('.1.3.6.1.4.1.637.'))
+          'isam'         # 1.3.6.1.4.1.637.61.1
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.9.1.745'))
           'asa'          # 1.3.6.1.4.1.9.1.745
         else
