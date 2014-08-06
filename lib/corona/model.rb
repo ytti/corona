@@ -26,6 +26,8 @@ module Corona
         'ios'
       when /Force10 OS/
         'ftos'
+      when /Versatile Routing Platform/
+        'vrp'
       when /^NetScreen/, /^SSG-\d+/
         'screenos'
       when /^Summit/
@@ -62,6 +64,8 @@ module Corona
           'acos'         # 1.3.6.1.4.1.22610.1.3.14
         when Regexp.new('^' + Regexp.quote('.1.3.6.1.4.1.637.'))
           'isam'         # 1.3.6.1.4.1.637.61.1
+        when Regexp.new('^' + Regexp.quote('.1.3.6.1.4.1.2011.'))
+          'vrp'          # 1.3.6.1.4.1.2011.2.224.67 (AR1220F)
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.9.1.745'))
           'asa'          # 1.3.6.1.4.1.9.1.745
         else
