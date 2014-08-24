@@ -18,10 +18,14 @@ module Corona
         'ironware'
       when /TiMOS/
         'timos'
+      when /ExtremeXOS/
+        'xos'
       when /Cisco Adaptive Security Appliance/
         'asa'
       when /Brocade Fibre Channel Switch/
         'fabricos'
+      when /Brocade VDX/
+        'nos'
       when /cisco/i, /Application Control Engine/i
         'ios'
       when /Force10 OS/
@@ -66,6 +70,10 @@ module Corona
           'isam'         # 1.3.6.1.4.1.637.61.1
         when Regexp.new('^' + Regexp.quote('.1.3.6.1.4.1.2011.'))
           'vrp'          # 1.3.6.1.4.1.2011.2.224.67 (AR1220F)
+        when Regexp.new('^' + Regexp.quote('.1.3.6.1.4.1.1588.'))
+          'nos'          # 1.3.6.1.4.1.1588.2.2.1.1.1.5 (VDX)
+        when Regexp.new('^' + Regexp.quote('.1.3.6.1.4.1.1916.'))
+          'xos'          # 1.3.6.1.4.1.1916.2.76 (X450a-48t)
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.9.1.745'))
           'asa'          # 1.3.6.1.4.1.9.1.745
         else
