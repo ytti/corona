@@ -76,6 +76,8 @@ module Corona
           'xos'          # 1.3.6.1.4.1.1916.2.76 (X450a-48t)
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.9.1.745'))
           'asa'          # 1.3.6.1.4.1.9.1.745
+        when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.20858.2.600'))
+          'casa'         # 1.3.6.1.4.1.20858.2.600
         else
           'unsupported'
         end
