@@ -80,8 +80,8 @@ module Corona
           'casa'         # 1.3.6.1.4.1.20858.2.600
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.2011.2.169'))
           'hias'         # 1.3.6.1.4.1.2011.2.169
-        when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.2352.1.18'))
-          'ssr'          # 1.3.6.1.4.1.2352.1.18
+        when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.2352.1'))
+          'ssr'          # 1.3.6.1.4.1.2352.1.17 and .18
         else
           'unsupported'
         end

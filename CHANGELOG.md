@@ -1,3 +1,6 @@
+# 0.1.6
+  - FIX: match older SSRs as well
+
 # 0.1.5
   - FEATURE: Ericsson SSR support
 
