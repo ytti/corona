@@ -1,3 +1,6 @@
+# 0.1.5
+  - FEATURE: Ericsson SSR support
+
 # 0.1.2
   - FEATURE: Alcatel ISAM support
   - FEATURE: Huawei VRP support
