@@ -55,6 +55,7 @@ module Corona
       result = nil
       snmp = SNMP.new ip.to_s, @community
       oids = snmp.dbget
+      return nil if oids[:sysDescr] == ::SNMP::NoSuchObject
       if oids
         result = {:oids=>oids, :ip=>ip, :int=>'n/a'}
         if index = snmp.ip2index(ip.to_s)

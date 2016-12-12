@@ -1,3 +1,6 @@
+# 0.1.7
+  - bugfix
+
 # 0.1.6
   - FIX: match older SSRs as well
 
