@@ -1,6 +1,10 @@
+# 0.1.8
+  - FEATURE: Huawei MA5800 support (HIAS)
+  - FIX: SSR's sysObjectID was changed in IPOS-16.1.1.8.29
+  
 # 0.1.7
   - bugfix
-
+  
 # 0.1.6
   - FIX: match older SSRs as well
 
