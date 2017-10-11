@@ -90,6 +90,8 @@ module Corona
           'ssr'          # 1.3.6.1.4.1.2352.1.17 and .18
         when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.193.218.1'))
           'ssr'          # 1.3.6.1.4.1.193.218.1.17 and .18
+        when Regexp.new('^' + Regexp.quote('1.3.6.1.4.1.11.2.3.7.11'))
+          'procurve'     # Aruba switches are really HP Procurve
         else
           'unsupported'
         end
