@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 begin
-  require 'corona/cli'
+  require_relative '../lib/corona/cli'
   Corona::CLI.new.run
 rescue => error
   warn "#{error}"

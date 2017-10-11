@@ -1,4 +1,4 @@
 module Corona
   class CoronaError < StandardError; end
-  require 'corona/core'
+  require_relative 'corona/core'
 end

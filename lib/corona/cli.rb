@@ -1,8 +1,8 @@
 module Corona
   class CLI
     MAX_DELETE = 1
-    require 'corona'
-    require 'slop'
+    gem 'slop', "=3.6.0"
+    require_relative '../corona'
     class NoConfig < CoronaError; end
 
     def run

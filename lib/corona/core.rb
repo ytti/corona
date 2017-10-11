@@ -1,8 +1,8 @@
-require 'corona/log'
-require 'corona/config'
-require 'corona/snmp'
-require 'corona/db/db'
-require 'corona/model'
+require_relative 'log'
+require_relative 'config'
+require_relative 'snmp'
+require_relative 'db/db'
+require_relative 'model'
 require 'ipaddr'
 require 'resolv'
 
