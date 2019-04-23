@@ -1,3 +1,6 @@
+# 0.1.10
+  - FIX: check error_status from snmp_response and act based on that
+
 # 0.1.9
   - FEATURE: Aruba switch support (rebranded HP Procurve)
 
