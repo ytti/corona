@@ -1,5 +1,6 @@
 module Corona
   class SNMP
+  class InvalidResponse < StandardError; end
     DB_OID = {
       :sysDescr     => '1.3.6.1.2.1.1.1.0',
       :sysObjectID  => '1.3.6.1.2.1.1.2.0',
@@ -35,7 +36,9 @@ module Corona
     def mget oids=DB_OID
       result = {}
       begin
-        @snmp.get(oids.map{|_,oid|oid}).each_varbind do |vb|
+        res = @snmp.get(oids.map{|_,oid|oid})
+        raise InvalidResponse, "#{res.error_status} from #{@snmp.config[:host]}" unless res.error_status == :noError
+        res.each_varbind do |vb|
           oids.each do |name,oid|
             if vb.name.to_str == oid
               result[name] = vb.value
@@ -44,6 +47,8 @@ module Corona
           end
         end
       rescue ::SNMP::RequestTimeout, Errno::EACCES
+        return false
+      rescue InvalidResponse => e
         return false
       end
       result
