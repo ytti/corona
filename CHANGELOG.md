@@ -1,3 +1,8 @@
+# 0.2.0
+  - move to use newer sequel gem
+    * this drops support for schema plugin
+  - refresh other dependencies as well
+
 # 0.1.10
   - FIX: check error_status from snmp_response and act based on that
 
